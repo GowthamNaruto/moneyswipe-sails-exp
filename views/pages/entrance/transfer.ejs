@@ -1,0 +1,100 @@
+<div id="transfer" v-cloak>
+  <div class="container-fluid pt-5 pb-5">
+    <h1 class="text-center">Transfer</h1>
+    <div style="max-width: 650px" class="mx-auto" v-if="!cloudSuccess">
+      <!-- <p class="text-center">
+        Have a question for us? Maybe some feedback? We love talking to users
+        about NEW_APP_NAME, and we're happy to answer questions about our
+        pricing, roadmap, or business solutions. Send us a note and we'll get
+        back to you as soon as possible.
+      </p> -->
+      <hr />
+      <ajax-form
+        action="transferAmountFromUser"
+        :form-errors.sync="formErrors"
+        :form-data="formData"
+        :form-rules="formRules"
+        :syncing.sync="syncing"
+        :cloud-error.sync="cloudError"
+        @submitted="submittedForm()"
+      >
+        <div class="form-group">
+          <label for="email-address">Transfer to</label>
+          <input
+            class="form-control"
+            id="email-address"
+            name="email-address"
+            type="email"
+            :class="[formErrors.emailAddress ? 'is-invalid' : '']"
+            v-model.trim="formData.emailAddress"
+            placeholder="Recepient's email address"
+            autocomplete="email"
+          />
+          <div class="invalid-feedback" v-if="formErrors.emailAddress">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            class="form-control"
+            id="amount"
+            name="amount"
+            type="number"
+            :class="[formErrors.amount ? 'is-invalid' : '']"
+            v-model.trim="formData.amount"
+            placeholder="50"
+            autocomplete="none"
+          />
+          <div class="invalid-feedback" v-if="formErrors.amount">
+            Please enter a valid amount.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            name="message"
+            :class="[formErrors.message ? 'is-invalid' : '']"
+            v-model.trim="formData.message"
+            placeholder="Any"
+            autocomplete="none"
+          ></textarea>
+          <div class="invalid-feedback" v-if="formErrors.message">
+            Message cannot be empty.
+          </div>
+        </div>
+        <cloud-error v-if="cloudError==='emailAlreadyInUse'"
+          >It looks like there's already an account with your email address. If
+          you forgot your password, you can recover it
+          <a href="password/forgot">here</a>.</cloud-error
+        >
+        <cloud-error v-else-if="cloudError"></cloud-error>
+        <div class="form-group">
+          <ajax-button
+            type="submit"
+            :syncing="syncing"
+            class="btn btn-dark btn-lg btn-block"
+            >transfer</ajax-button
+          >
+        </div>
+      </ajax-form>
+    </div>
+    <div style="max-width: 450px" class="mx-auto text-center" v-else>
+      <h1 class="text-center">Payment has been done</h1>
+      <hr />
+      <p class="text-center">Repeat payment</p>
+      <div class="form-inline d-none ml-2 d-md-block">
+        <a class="btn btn-outline-info" href="/transfer">Transfer</a>
+      </div>
+      <hr />
+      <p class="text-center">My Account</p>
+      <div class="form-inline d-none ml-2 d-md-block">
+        <a class="btn btn-outline-info" href="/">Go Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

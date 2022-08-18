@@ -1,0 +1,4 @@
+assets/dependencies/**/*.js
+views/**/*.ejs
+api/**/*.js
+
