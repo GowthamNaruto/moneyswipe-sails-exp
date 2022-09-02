@@ -1,129 +1,5 @@
-<div id="welcome">
+<div id="transactions">
   <account-notification-banner></account-notification-banner>
-  <div class="container pt-5 pb-5">
-    <h1>Welcome! {{ me.fullName }}</h1>
-    <hr />
-    <div class="form-inline d-none ml-2 d-md-block">
-      <!-- <a class="btn btn-outline-info" href="/signup">Sign up</a> -->
-      <a class="btn btn-outline-info" href="/transfer">Transfer</a>
-    </div>
-
-    <!-- <p>
-      This is a page that only logged-in people can visit. Don't you feel
-      special? Try clicking on a button below to do some things you can't do
-      when you're logged out.
-    </p> -->
-    <div class="buttons">
-      <!-- <a class="btn btn-info" href="/account/profile">Update my email</a> -->
-      <a class="btn btn-info" href="/account/profile">Transaction</a>
-      <button
-        class="btn btn-outline-info ml-2"
-        @click="clickOpenExampleModalButton()"
-      >
-        Open a modal
-      </button>
-    </div>
-
-
-    <main class="app">
-      <div class="main-view">
-        <!-- BALANCE -->
-        <div class="sub-list-view">
-          <div class="balance">
-            <div>
-              <p class="balance__label">Current balance</p>
-              <p class="balance__date">
-                As of           
-                <js-timestamp :at="pageLoadedAt" format="calendar"></js-timestamp>
-                
-              </p>
-            </div>
-            <p class="balance__value">{{ me.movements }}₹</p>
-          </div>
-
-          <!-- MOVEMENTS -->
-          <!-- <div class="movements">
-            <div class="movements__row">
-              <div class="movements__type movements__type--deposit">
-                2 deposit
-              </div>
-              <div class="movements__date">3 days ago</div>
-              <div class="movements__value">4 000€</div>
-            </div>
-            <div class="movements__row">
-              <div class="movements__type movements__type--withdrawal">
-                1 withdrawal
-              </div>
-              <div class="movements__date">24/01/2037</div>
-              <div class="movements__value">-378€</div>
-            </div>
-          </div>
-
-          <!-- SUMMARY -->
-          <div class="summary">
-            <p class="summary__label">In</p>
-            <p class="summary__value summary__value--in">0000₹</p>
-            <p class="summary__label">Out</p>
-            <p class="summary__value summary__value--out">0000₹</p>
-            <p class="summary__label">Interest</p>
-            <p class="summary__value summary__value--interest">0000₹</p>
-            <button class="btn--sort">SORT</button>
-          </div>
-        </div>
-
-        <!-- <div class="sub-form-view"> -->
-        <!-- OPERATION: TRANSFERS 
-          <div class="operation operation--transfer">
-            <h2>Transfer money</h2>
-            <form class="form form--transfer">
-              <label class="form__label">Transfer to</label>
-              <input
-                placeholder="Email ID"
-                type="text"
-                class="form__input form__input--to"
-              />
-              <label class="form__label">Amount</label>
-              <input type="number" class="form__input form__input--amount" />
-              <button class="form__btn form__btn--transfer">Send</button>
-              <!-- <button class="form__btn form__btn--transfer">&rarr;</button> -->
-        <!-- </form>
-          </div> -->
-
-        <!-- OPERATION: LOAN -->
-        <!-- <div class="operation operation--loan">
-            <h2>Request loan</h2>
-            <form class="form form--loan">
-          <input type="number" class="form__input form__input--loan-amount" />
-          <button class="form__btn form__btn--loan">&rarr;</button>
-          <label class="form__label form__label--loan">Amount</label>
-        </form>
-      </div> -->
-
-        <!-- OPERATION: CLOSE -->
-        <!-- <div class="operation operation--close">
-        <h2>Close account</h2>
-        <form class="form form--close">
-          <input type="text" class="form__input form__input--user" />
-          <input
-          type="password"
-          maxlength="6"
-          class="form__input form__input--pin"
-          />
-          <button class="form__btn form__btn--close">&rarr;</button>
-          <label class="form__label">Confirm user</label>
-          <label class="form__label">Confirm PIN</label>
-        </form>
-      </div> -->
-
-        <!-- LOGOUT TIMER -->
-        <!-- <p class="logout-timer">
-            You will be logged out in <span class="timer">05:00</span>
-          </p> 
-        </div>
-      </div>-->
-    </main>
-  </div>
-
   <router-view></router-view>
 
   <!--  ╔═╗═╗ ╦╔═╗╔╦╗╔═╗╦  ╔═╗  ┌┬┐┌─┐┌┬┐┌─┐┬
@@ -136,7 +12,7 @@
     v-cloak
   >
     <div class="modal-header">
-      <h2 class="modal-title">Example modal</h2>
+      <h2 class="modal-title">Transactions</h2>
       <p class="modal-intro">
         At your leisure, please peruse this excerpt from a whale of a tale.
       </p>

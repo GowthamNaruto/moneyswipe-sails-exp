@@ -41,6 +41,7 @@ module.exports = {
 
     // Look up the user with this reset token.
     var userRecord = await User.findOne({ emailAddress: emailAddress });
+
     // var userAmount = userRecord.movements
 
     // If no such user exists, or their token is expired, bail.
@@ -51,11 +52,26 @@ module.exports = {
       throw "insufficientFunds";
     }
 
+    // Update current date
+    // const labelDate = document.querySelector(".date");
+
+    // const now = new Date();
+    // const option = {
+    //   hour: "numeric",
+    //   minute: "numeric",
+    //   day: "numeric",
+    //   month: "long",
+    //   year: "numeric",
+    //   weekday: "long",
+    // };
+    // labelDate.textContent = new Intl.DateTimeFormat(locale, option).format(now);
     //Uptade the movement
 
     // Store the user's new password and clear their reset token so it can't be used again.
+    var value = userRecord.movements + amount;
+
     await User.updateOne({ id: userRecord.id }).set({
-      movements: amount,
+      movements: value,
     });
 
     var balance = this.req.me.movements - amount;

@@ -1,5 +1,5 @@
 module.exports = {
-  friendlyName: "View contact",
+  friendlyName: "View transfer",
 
   description: 'Display "Transfer" page.',
 

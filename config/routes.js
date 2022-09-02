@@ -57,11 +57,13 @@ module.exports.routes = {
   "PUT   /api/v1/account/update-billing-card": {
     action: "account/update-billing-card",
   },
-  "PUT  /api/v1/transfer-amount-from-user": {
-    action: "transfer-amount-from-user",
-  },
+  // "PUT  /api/v1/transfer-amount-from-user": {
+  //   action: "transfer-amount-from-user",
+  // },
+
   "PUT   /api/v1/entrance/login": { action: "entrance/login" },
   "POST  /api/v1/entrance/signup": { action: "entrance/signup" },
+  "POST  /api/v1/entrance/transfer": { action: "entrance/transfer" },
   "POST  /api/v1/entrance/send-password-recovery-email": {
     action: "entrance/send-password-recovery-email",
   },

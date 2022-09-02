@@ -99,6 +99,13 @@ So, while this \`isSuperAdmin\` demarcation might not be the right approach fore
       example: 1502844074211,
     },
 
+    // movements: {
+    //   type: "json",
+    //   columnType: "array",
+    //   description: "Movements of a user which includes withdrawl and deposit",
+    //   example: 15000,
+    // },
+
     movements: {
       type: "number",
       description: "Movements of a user which includes withdrawl and deposit",
