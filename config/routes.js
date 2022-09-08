@@ -22,6 +22,7 @@ module.exports.routes = {
 
   "GET /signup": { action: "entrance/view-signup" },
   "GET /transfer": { action: "entrance/view-transfer" },
+
   "GET /email/confirm": { action: "entrance/confirm-email" },
   "GET /email/confirmed": { action: "entrance/view-confirmed-email" },
 
@@ -32,6 +33,7 @@ module.exports.routes = {
   "GET /account": { action: "account/view-account-overview" },
   "GET /account/password": { action: "account/view-edit-password" },
   "GET /account/profile": { action: "account/view-edit-profile" },
+  "GET /account/transactions": { action: "account/view-transaction-logs" },
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗

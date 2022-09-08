@@ -1,0 +1,182 @@
+<div id="transactions">
+  <account-notification-banner></account-notification-banner>
+  <router-view></router-view>
+
+  <!--  ╔═╗═╗ ╦╔═╗╔╦╗╔═╗╦  ╔═╗  ┌┬┐┌─┐┌┬┐┌─┐┬
+    ║╣ ╔╩╦╝╠═╣║║║╠═╝║  ║╣   ││││ │ ││├─┤│
+    ╚═╝╩ ╚═╩ ╩╩ ╩╩  ╩═╝╚═╝  ┴ ┴└─┘─┴┘┴ ┴┴─┘  -->
+  <div class="history-page">
+    <h1 class="text-center">Payment History</h1>
+    <hr />
+    <div class="search">
+      <div class="search__icon-background">
+        <span
+          class="iconify search__icon"
+          data-inline="false"
+          data-icon="ant-design:search-outlined"
+        ></span>
+      </div>
+      <input
+        class="search__input-box"
+        type="search"
+        placeholder="Search..."
+        autocomplete="off"
+      />
+    </div>
+    <div class="history-page__transaction"></div>
+  </div>
+  <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+</div>
+
+<script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+
+<script>
+  const transactionData = [
+    {
+      name: "Gowtham Selvam",
+      date: "Tuesday, January 22",
+      amount: "$2.54",
+      color: "medium-spring-bud",
+      icon: "bi:arrow-bar-down",
+    },
+    {
+      name: "Naruto Uzumaki",
+      date: "Friday, February 17",
+      amount: "$3.05",
+      color: "infra-red",
+      icon: "bi:arrow-bar-up",
+    },
+    {
+      name: "Dunkin Donuts Breakfast Sandwich",
+      date: "Monday, January 6",
+      amount: "$3.99",
+      color: "burlywood",
+      icon: "donut",
+    },
+  ];
+  const transactions = document.querySelector(".history-page__transaction");
+  const searchInputBox = document.querySelector(".search__input-box");
+
+  function createIcon(icon) {
+    const transactionIcon = document.createElement("span");
+
+    switch (icon) {
+      case "bi:arrow-bar-down":
+        transactionIcon.className =
+          "iconify transaction__icon transaction__icon--bi:arrow-bar-down";
+        transactionIcon.setAttribute("data-inline", "false");
+        transactionIcon.setAttribute("data-icon", "bi:arrow-bar-down");
+        break;
+      case "bi:arrow-bar-up":
+        transactionIcon.className =
+          "iconify transaction__icon transaction__icon--bi:arrow-bar-up";
+        transactionIcon.setAttribute("data-inline", "false");
+        transactionIcon.setAttribute("data-icon", "bi:arrow-bar-up");
+        break;
+      case "donut":
+        transactionIcon.className =
+          "iconify transaction__icon transaction__icon--donut";
+        transactionIcon.setAttribute("data-inline", "false");
+        transactionIcon.setAttribute("data-icon", "fe:donut");
+        break;
+      default:
+    }
+
+    return transactionIcon;
+  }
+
+  function createTransactionIconBackground(icon) {
+    const transactionIconBackground = document.createElement("div");
+    transactionIconBackground.className = "transaction__icon-background";
+
+    const transactionIcon = createIcon(icon);
+
+    transactionIconBackground.appendChild(transactionIcon);
+    return transactionIconBackground;
+  }
+
+  function createTransactionInfo(name, date) {
+    const transactionInfo = document.createElement("div");
+    transactionInfo.className = "transaction__info";
+
+    const transactionTitle = document.createElement("p");
+    transactionTitle.className = "transaction__title";
+    transactionTitle.innerHTML = name;
+
+    const transactionDate = document.createElement("p");
+    transactionDate.className = "transaction__date";
+    transactionDate.innerHTML = date;
+
+    const transactionDetailsBtn = document.createElement("button");
+    transactionDetailsBtn.className = "transaction__details-btn";
+    transactionDetailsBtn.innerHTML = "Details";
+
+    transactionInfo.appendChild(transactionTitle);
+    transactionInfo.appendChild(transactionDate);
+    transactionInfo.appendChild(transactionDetailsBtn);
+    return transactionInfo;
+  }
+
+  function createTransactionAmount(amount) {
+    const transactionAmount = document.createElement("p");
+    transactionAmount.className = "transaction__amount";
+    transactionAmount.innerHTML = amount;
+    return transactionAmount;
+  }
+
+  function hasTransactionsListChanged(transactionsArr) {
+    const transactionNameList = transactionsArr
+      .map((transaction) => transaction.name)
+      .join("");
+    const currentTransactionTitleDivs = document.querySelectorAll(
+      ".transaction__title"
+    );
+    const currentTransactionTitles = [];
+    for (let i = 0; i < currentTransactionTitleDivs.length; i++) {
+      currentTransactionTitles.push(currentTransactionTitleDivs[i].innerText);
+    }
+    return currentTransactionTitles.join("") !== transactionNameList;
+  }
+
+  function createHistoryPageTransactions(transactionsArr) {
+    transactions.innerHTML = "";
+    for (let i = 0; i < transactionsArr.length; i++) {
+      const { name, date, amount, icon } = transactionsArr[i];
+      const transaction = document.createElement("div");
+      transaction.className = "transaction";
+
+      const transactionIconBackground = createTransactionIconBackground(icon);
+
+      const transactionInfo = createTransactionInfo(name, date);
+
+      const transactionAmount = createTransactionAmount(amount);
+
+      transaction.appendChild(transactionIconBackground);
+      transaction.appendChild(transactionInfo);
+      transaction.appendChild(transactionAmount);
+
+      transactions.appendChild(transaction);
+    }
+  }
+
+  function createSearchResults(e) {
+    const searchInput = e.target.value.toLowerCase().replace(/\s/g, "");
+    // switch to a filter
+    const searchResults = transactionData.filter((transaction) => {
+      const transactionName = transaction.name
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .slice(0, searchInput.length);
+      return searchInput === transactionName;
+    });
+    if (searchInput === "") {
+      createHistoryPageTransactions(transactionData);
+    } else if (hasTransactionsListChanged(searchResults)) {
+      createHistoryPageTransactions(searchResults);
+    }
+  }
+
+  createHistoryPageTransactions(transactionData);
+
+  searchInputBox.addEventListener("keyup", createSearchResults);
+</script>
